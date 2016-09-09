@@ -6,6 +6,10 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 
 import { green300, green800 } from 'material-ui/styles/colors';
 
+import XpensesBalance from '../xpenses/XpensesBalance';
+import XpensesIncomes from '../xpenses/XpensesIncomes';
+import XpensesOutcomes from '../xpenses/XpensesOutcomes';
+
 const styles = {
   base: {
     backgroundColor: green300,
@@ -32,10 +36,25 @@ class AppContentSection extends Component {
         tabItemContainerStyle={styles.base}
         inkBarStyle={styles.ink}
         contentContainerStyle={styles.content}
-      >
-        <Tab style={styles.tab} label="Balanço"><h2>Balanço</h2></Tab>
-        <Tab style={styles.tab} label="Entradas"><h2>Entradas</h2></Tab>
-        <Tab style={styles.tab} label="Saídas"><h2>Saídas</h2></Tab>
+        >
+        <Tab
+          style={styles.tab}
+          label="Balanço"
+          >
+          <XpensesBalance />
+        </Tab>
+        <Tab
+          style={styles.tab}
+          label="Entradas"
+          >
+          <XpensesIncomes />
+        </Tab>
+        <Tab
+          style={styles.tab}
+          label="Saídas"
+          >
+          <XpensesOutcomes />
+        </Tab>
       </Tabs>
     );
   }
