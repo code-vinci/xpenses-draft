@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { StyleRoot } from 'radium';
 
-import Home from './pages/home/Home';
+import Home from './pages/Home';
 
 import './index.css';
 
@@ -11,7 +12,9 @@ injectTapEventPlugin();
 
 const App = _ => (
   <MuiThemeProvider>
-    <Home />
+    <StyleRoot>
+      <Home />
+    </StyleRoot>
   </MuiThemeProvider>
 );
 
