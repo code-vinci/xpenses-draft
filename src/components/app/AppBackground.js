@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 
-import { green500 } from 'material-ui/styles/colors';
+import { green600 } from 'material-ui/styles/colors';
 
 const styles = {
   base: {
@@ -10,7 +10,7 @@ const styles = {
     '@media (min-width: 720px)': {
       display: 'block',
       height: 128,
-      backgroundColor: green500,
+      backgroundColor: green600,
     }
   }
 };

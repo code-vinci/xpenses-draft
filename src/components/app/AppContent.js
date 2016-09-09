@@ -4,6 +4,7 @@ import Radium from 'radium';
 import Paper from 'material-ui/Paper';
 
 import AppHeader from '../../components/app/AppHeader';
+import AppContentSection from '../../components/app/AppContentSection';
 
 const styles = {
   base: {
@@ -16,7 +17,7 @@ const styles = {
     '@media (min-width: 720px)': {
       maxWidth: '90vw',
       bottom: 64,
-      top: 64,
+      top: 0,
       left: 0,
       right: 0,
       margin: 'auto',
@@ -36,6 +37,7 @@ class AppContent extends Component {
       <div style={styles.base}>
         <Paper style={styles.content} zDepth={1}>
           <AppHeader />
+          <AppContentSection />
         </Paper>
       </div>
     );

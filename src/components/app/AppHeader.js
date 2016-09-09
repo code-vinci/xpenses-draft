@@ -5,11 +5,11 @@ import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
 
-import { green400 } from 'material-ui/styles/colors';
+import { green600 } from 'material-ui/styles/colors';
 
 const styles = {
   base: {
-    backgroundColor: green400,
+    backgroundColor: green600,
     flex: 1,
     color: '#fff',
     alignSelf: 'flex-start',
@@ -58,6 +58,7 @@ class AppHeader extends Component {
         showMenuIconButton={false}
         iconElementRight={<AppHeaderDropdownMenu />}
         iconStyleRight={styles.icon}
+        zDepth={0}
       />
     );
   }
