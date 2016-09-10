@@ -9,8 +9,13 @@ const styles = {
 
     '@media (min-width: 720px)': {
       display: 'block',
-      height: 128,
+      height: 112,
       backgroundColor: green600,
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      width: '100%',
+      zIndex: -1,
     }
   }
 };

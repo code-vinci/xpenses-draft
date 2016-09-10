@@ -3,43 +3,22 @@ import Radium from 'radium';
 
 import Paper from 'material-ui/Paper';
 
-import AppHeader from '../../components/app/AppHeader';
-import AppContentSection from '../../components/app/AppContentSection';
-
 const styles = {
   base: {
     display: 'flex',
-    width: '100vw',
-    height: '100vh',
-    flexDirection: 'row',
-    overflow: 'hidden',
-
-    '@media (min-width: 720px)': {
-      maxWidth: '90vw',
-      bottom: 64,
-      top: 0,
-      left: 0,
-      right: 0,
-      margin: 'auto',
-      position: 'absolute',
-      height: 'auto',
-    },
-  },
-
-  content: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
     flex: 1,
+    position: 'relative',
   },
 };
 
 class AppContent extends Component {
   render() {
     return (
-      <div style={styles.base}>
-        <Paper style={styles.content} zDepth={1}>
-          <AppHeader />
-          <AppContentSection />
-        </Paper>
-      </div>
+      <Paper style={styles.base}>
+        {this.props.children}
+      </Paper>
     );
   }
 };

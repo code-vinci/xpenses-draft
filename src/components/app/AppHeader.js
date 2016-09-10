@@ -9,10 +9,11 @@ import { green600 } from 'material-ui/styles/colors';
 
 const styles = {
   base: {
-    backgroundColor: green600,
-    flex: 1,
     color: '#fff',
-    alignSelf: 'flex-start',
+  },
+
+  header: {
+    backgroundColor: green600,
     alignItems: 'center',
   },
 
@@ -32,35 +33,60 @@ const styles = {
   dropdownUnderline: {
     display: 'none',
   },
-};
 
-const AppHeaderDropdownMenu = Radium((props) => {
-  return (
-    <DropDownMenu
-      value={1}
-      style={styles.dropdown}
-      labelStyle={styles.dropdownLabel}
-      underlineStyle={styles.dropdownUnderline}
-    >
-      <MenuItem value={1} primaryText="Janeiro" />
-      <MenuItem value={2} primaryText="Fevereiro" />
-      <MenuItem value={3} primaryText="Março" />
-    </DropDownMenu>
-  );
-});
+  dropdownMenu: {
+    fontSize: '24px',
+    lineHeight: '48px',
+  },
+};
 
 class AppHeader extends Component {
   render() {
     return (
-      <AppBar
-        title="Xpenses - Draft"
+      <div
         style={styles.base}
-        showMenuIconButton={false}
-        iconElementRight={<AppHeaderDropdownMenu />}
-        iconStyleRight={styles.icon}
-        zDepth={0}
-      />
+        >
+        <AppBar
+          title="Xpenses - Draft"
+          style={styles.header}
+          showMenuIconButton={false}
+          iconElementRight={this.renderDropdownMenu()}
+          iconStyleRight={styles.icon}
+          zDepth={0}
+        />
+      </div>
     );
+  }
+
+  renderDropdownMenu() {
+    if (! this.props.currentMonth || ! this.props.months) {
+      return <div></div>;
+    }
+
+    return (
+      <DropDownMenu
+        value={this.props.currentMonth.code}
+        style={styles.dropdown}
+        labelStyle={styles.dropdownLabel}
+        underlineStyle={styles.dropdownUnderline}
+        onChange={this.changeMonth}
+        >
+        {this.props.months.map((month) => {
+          return (
+            <MenuItem
+              value={month.code}
+              primaryText={month.description}
+              key={month.id}
+              style={styles.dropdownMenu}
+              />
+          );
+        })}
+      </DropDownMenu>
+    );
+  }
+
+  changeMonth = (event, key, monthCode) => {
+    this.props.changeMonth(this.props.months[key]);
   }
 };
 

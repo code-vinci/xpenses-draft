@@ -1,31 +1,29 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
 import { connect } from 'react-redux';
 
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 import { green50 } from 'material-ui/styles/colors';
 
-import AppTable from '../app/AppTable';
+import AppLoader from '../components/app/AppLoader';
+import AppTable from '../components/app/AppTable';
 
-import { xpensesFetchIncomes } from '../../data/actions/xpenses/incomes-actions';
+const styles = {
+  base: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+  },
+};
 
-class XpensesIncomes extends Component {
-  componentWillReceiveProps(newProps) {
-    if (this.props.month && newProps.month.id == this.props.month.id) {
-      return false;
-    }
-
-    this.props.fetchIncomes(newProps.month.code);
-  }
-
+class Incomes extends Component {
   render() {
-    if (! this.props.data) {
+    if (! this.props.incomes.length && ! this.props.isLoading) {
       return <span>Nenhuma entrada encontrada</span>;
     }
 
     return (
       <AppTable headers={[ 'Valor', 'Descrição', 'Data', ]}>
-        {this.props.data.map(this.renderIncomeRow)}
+        {this.props.incomes.map(this.renderIncomeRow)}
       </AppTable>
     );
   }
@@ -47,15 +45,14 @@ class XpensesIncomes extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ...state.xpenses.incomes,
-    month: state.app.currentMonth,
+    incomes: state.incomes,
+    isLoading: state.isLoading,
+    month: state.currentMonth,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchIncomes: (monthCode) => dispatch(xpensesFetchIncomes(monthCode)),
-  };
+  return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(XpensesIncomes);
+export default connect(mapStateToProps, mapDispatchToProps)(Incomes);
