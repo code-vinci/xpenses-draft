@@ -29,7 +29,7 @@ class API {
     const cached = LocalStorage.getObject(url);
 
     if (cached) {
-//      return Promise.resolve(cached);
+      return Promise.resolve(cached);
     }
 
     const options = {
