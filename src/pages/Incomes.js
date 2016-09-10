@@ -4,16 +4,7 @@ import { connect } from 'react-redux';
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 import { green50 } from 'material-ui/styles/colors';
 
-import AppLoader from '../components/app/AppLoader';
 import AppTable from '../components/app/AppTable';
-
-const styles = {
-  base: {
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-  },
-};
 
 class Incomes extends Component {
   render() {

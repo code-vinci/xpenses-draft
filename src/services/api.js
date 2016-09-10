@@ -56,8 +56,8 @@ class API {
     return fetch(url, options)
       .then((response) => response.json())
       .then((response) => {
-        if (response.errors) {
-          return Promise.reject(response);
+        if (! response) {
+          return Promise.reject('Not found');
         }
 
         LocalStorage.setObject(url, response);

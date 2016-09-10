@@ -88,6 +88,31 @@ function app(state = initial, action) {
         error: action.error,
       };
 
+    /*
+     * GET OUTCOMES
+     */
+    case actions.REQUEST_OUTCOMES:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case actions.RECEIVE_OUTCOMES_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        outcomes: action.outcomes,
+        error: null,
+      };
+
+    case actions.RECEIVE_OUTCOMES_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        outcomes: [],
+        error: action.error,
+      };
+
     default:
       return state;
   }

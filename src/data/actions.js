@@ -12,6 +12,9 @@ export const REQUEST_INCOMES = 'REQUEST_INCOMES';
 export const RECEIVE_INCOMES_SUCCESS = 'RECEIVE_INCOMES_SUCCESS';
 export const RECEIVE_INCOMES_ERROR = 'RECEIVE_INCOMES_ERROR';
 
+export const REQUEST_OUTCOMES = 'REQUEST_OUTCOMES';
+export const RECEIVE_OUTCOMES_SUCCESS = 'RECEIVE_OUTCOMES_SUCCESS';
+export const RECEIVE_OUTCOMES_ERROR = 'RECEIVE_OUTCOMES_ERROR';
 
 /*
  * INITIAL DATA
@@ -22,11 +25,11 @@ export function fetchInitialData() {
 
     return API.get('months')
       .then((months) => {
-          dispatch(receiveInitialDataSuccess({
-            months,
-            currentMonth: months[1],
-          }));
-          dispatch(fetchIncomes(months[1].code));
+          const currentMonth = months[0];
+
+          dispatch(receiveInitialDataSuccess({ months, currentMonth }));
+          dispatch(fetchIncomes(currentMonth.code));
+          dispatch(fetchOutcomes(currentMonth.code));
       });
   };
 };
@@ -53,6 +56,7 @@ export function changeMonth(month) {
     if (month) {
       dispatch(receiveChangeMonthSuccess(month));
       dispatch(fetchIncomes(month.code));
+      dispatch(fetchOutcomes(month.code));
     } else {
       dispatch(receiveChangeMonthError('Mês inválido'));
     }
@@ -101,4 +105,36 @@ export function receiveIncomesSuccess(incomes) {
 
 export function receiveIncomesError(error) {
   return { type: RECEIVE_INCOMES_ERROR, error, };
+};
+
+/*
+ * OUTCOMES
+ */
+export function fetchOutcomes(monthCode) {
+  return (dispatch) => {
+    dispatch(requestOutcomes());
+
+    return API.get(`outcomes/${monthCode}`)
+      .then(
+        (response) => {
+          dispatch(receiveOutcomesSuccess(response));
+        },
+
+        (error) => {
+          dispatch(receiveOutcomesError('Nenhum registro encontrado'));
+        },
+      );
+  };
+};
+
+export function requestOutcomes() {
+  return { type: REQUEST_OUTCOMES, };
+};
+
+export function receiveOutcomesSuccess(outcomes) {
+  return { type: RECEIVE_OUTCOMES_SUCCESS, outcomes, };
+};
+
+export function receiveOutcomesError(error) {
+  return { type: RECEIVE_OUTCOMES_ERROR, error, };
 };
