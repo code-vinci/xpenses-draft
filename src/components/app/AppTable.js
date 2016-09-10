@@ -1,13 +1,42 @@
 import React, { Component } from 'react';
 
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'material-ui/Table';
+import { green900 } from 'material-ui/styles/colors';
+
+const styles = {
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  fixed: {
+    overflowY: 'overlay',
+    flex: 1,
+  },
+  table: {
+    height: 36,
+  },
+  header: {
+    color: green900,
+    height: 36,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+};
 
 class AppTable extends Component {
   render() {
     return (
-      <Table selectable={false}>
-        <TableHeader displaySelectAll={this.props.displaySelect || false} adjustForCheckbox={this.props.displaySelect || false}>
-          <TableRow>{this.renderHeaderRows()}</TableRow>
+      <Table
+        selectable={false}
+        style={styles.table}
+        wrapperStyle={styles.base}
+        bodyStyle={this.props.fixed ? styles.fixed : {}}
+        >
+        <TableHeader
+          displaySelectAll={this.props.displaySelect || false}
+          adjustForCheckbox={this.props.displaySelect || false}
+          >
+          <TableRow style={styles.table}>{this.renderHeaderRows()}</TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={this.props.displaySelect || false}>
           {this.props.children}
@@ -21,7 +50,7 @@ class AppTable extends Component {
       return false;
     }
 
-    return this.props.headers.map((header, index) => <TableHeaderColumn key={index}>{header}</TableHeaderColumn>);
+    return this.props.headers.map((header, index) => <TableHeaderColumn style={styles.header} key={index}>{header}</TableHeaderColumn>);
   }
 }
 

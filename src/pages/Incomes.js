@@ -6,6 +6,14 @@ import { green50 } from 'material-ui/styles/colors';
 
 import AppTable from '../components/app/AppTable';
 
+const styles = {
+  base: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+  },
+};
+
 class Incomes extends Component {
   render() {
     if (this.props.isLoading.length) {
@@ -17,9 +25,11 @@ class Incomes extends Component {
     }
 
     return (
-      <AppTable headers={[ 'Valor', 'Descrição', 'Data', ]}>
-        {this.props.incomes.map(this.renderIncomeRow)}
-      </AppTable>
+      <div style={styles.base}>
+        <AppTable headers={[ 'Valor', 'Descrição', 'Data', ]}>
+          {this.props.incomes.map(this.renderIncomeRow)}
+        </AppTable>
+      </div>
     );
   }
 

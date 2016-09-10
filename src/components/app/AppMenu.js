@@ -27,6 +27,10 @@ const styles = {
 
 class AppMenu extends Component {
   render() {
+    if (! this.props.routes || ! this.props.routes.length) {
+      return false;
+    };
+
     return (
       <div style={styles.base}>
         {this.props.routes.map(this.renderMenuItems)}
@@ -39,7 +43,8 @@ class AppMenu extends Component {
       return false;
     }
 
-    const current = route.path === this.props.current
+    const path = this.props.current.split('/');
+    const current = route.path === path[path.length - 1]
       ? styles.current
       : {};
 
@@ -51,7 +56,7 @@ class AppMenu extends Component {
         backgroundColor={this.props.current === route.path ? green700 : green400}
         hoverColor="rgba(255, 255, 255, .2)"
         rippleColor="rgba(255, 255, 255, .3)"
-        onClick={() => this.props.router.push(route.path)}
+        onClick={() => this.props.router.push(`/${this.props.month.code}/${route.path}`)}
         />
     );
   }

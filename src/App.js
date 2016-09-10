@@ -6,6 +6,7 @@ import AppBackground from './components/app/AppBackground';
 import AppHeader from './components/app/AppHeader';
 import AppMenu from './components/app/AppMenu';
 import AppContent from './components/app/AppContent';
+import AppLoader from './components/app/AppLoader';
 
 import { fetchInitialData, changeMonth } from './data/actions';
 
@@ -36,20 +37,29 @@ class App extends Component {
 
   componentWillMount() {
     this.props.fetchInitialData();
-    this.redirect(this.props.location);
   }
 
   componentWillReceiveProps(newProps) {
-    this.redirect(newProps.location);
-  }
+    const { currentMonth } = this.props;
 
-  redirect(location) {
-    if (location.pathname === '/') {
-      this.context.router.push('/balance');
+    if ((currentMonth && newProps.currentMonth) && currentMonth.code !== newProps.currentMonth.code) {
+      this.redirect(newProps.currentMonth.code);
+    }
+
+    if (newProps.location.pathname === '/' && currentMonth) {
+      this.redirect(currentMonth.code);
     }
   }
 
+  redirect(monthCode) {
+    this.context.router.push(`/${monthCode}/balance`);
+  }
+
   render() {
+    if (this.props.isLoading.length) {
+      return <AppLoader isLoading={this.props.isLoading} />;
+    }
+
     return (
       <div style={styles.base}>
         <div style={styles.container}>
@@ -62,6 +72,7 @@ class App extends Component {
             router={this.context.router}
             routes={this.props.route.childRoutes}
             current={this.props.location.pathname}
+            month={this.props.currentMonth}
             />
           <AppContent isLoading={this.props.isLoading}>{this.props.children}</AppContent>
         </div>
