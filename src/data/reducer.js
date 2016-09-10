@@ -1,7 +1,7 @@
 import * as actions from './actions';
 
 const initial = {
-  isLoading: false,
+  isLoading: [],
   months: [],
   currentMonth: null,
   incomes: [],
@@ -17,13 +17,13 @@ function app(state = initial, action) {
     case actions.REQUEST_INITIAL_DATA:
       return {
         ...state,
-        isLoading: true,
+        isLoading: state.isLoading.concat(1),
       };
 
     case actions.RECEIVE_INITIAL_DATA_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isLoading: state.isLoading.slice(1),
         months: action.payload.months,
         currentMonth: action.payload.currentMonth,
         error: null,
@@ -32,7 +32,7 @@ function app(state = initial, action) {
     case actions.RECEIVE_INITIAL_DATA_ERROR:
       return {
         ...state,
-        isLoading: false,
+        isLoading: state.isLoading.slice(1),
         months: [],
         currentMonth: null,
         error: action.error,
@@ -44,13 +44,13 @@ function app(state = initial, action) {
     case actions.REQUEST_CHANGE_MONTH:
       return {
         ...state,
-        isLoading: true,
+        isLoading: state.isLoading.concat(1),
       };
 
     case actions.RECEIVE_CHANGE_MONTH_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isLoading: state.isLoading.slice(1),
         currentMonth: action.month,
         error: null,
       };
@@ -58,7 +58,7 @@ function app(state = initial, action) {
     case actions.RECEIVE_CHANGE_MONTH_ERROR:
       return {
         ...state,
-        isLoading: false,
+        isLoading: state.isLoading.slice(1),
         currentMonth: null,
         error: action.error,
       };
@@ -69,13 +69,13 @@ function app(state = initial, action) {
     case actions.REQUEST_INCOMES:
       return {
         ...state,
-        isLoading: true,
+        isLoading: state.isLoading.concat(1),
       };
 
     case actions.RECEIVE_INCOMES_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isLoading: state.isLoading.slice(1),
         incomes: action.incomes,
         error: null,
       };
@@ -83,7 +83,7 @@ function app(state = initial, action) {
     case actions.RECEIVE_INCOMES_ERROR:
       return {
         ...state,
-        isLoading: true,
+        isLoading: state.isLoading.slice(1),
         incomes: [],
         error: action.error,
       };
@@ -94,13 +94,13 @@ function app(state = initial, action) {
     case actions.REQUEST_OUTCOMES:
       return {
         ...state,
-        isLoading: true,
+        isLoading: state.isLoading.concat(1),
       };
 
     case actions.RECEIVE_OUTCOMES_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isLoading: state.isLoading.slice(1),
         outcomes: action.outcomes,
         error: null,
       };
@@ -108,9 +108,21 @@ function app(state = initial, action) {
     case actions.RECEIVE_OUTCOMES_ERROR:
       return {
         ...state,
-        isLoading: false,
+        isLoading: state.isLoading.slice(1),
         outcomes: [],
         error: action.error,
+      };
+
+    case actions.REQUEST_ALL:
+      return {
+        ...state,
+        isLoading: state.isLoading.concat(1),
+      };
+
+    case actions.RECEIVE_ALL:
+      return {
+        ...state,
+        isLoading: state.isLoading.slice(1),
       };
 
     default:

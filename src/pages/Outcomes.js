@@ -5,11 +5,16 @@ import { TableRow, TableRowColumn } from 'material-ui/Table';
 import { red50 } from 'material-ui/styles/colors';
 
 import AppTable from '../components/app/AppTable';
+import AppError from '../components/app/AppError';
 
 class Outcomes extends Component {
   render() {
-    if (! this.props.outcomes.length && ! this.props.isLoading) {
-      return <span>Nenhuma saída encontrada</span>;
+    if (this.props.isLoading.length) {
+      return false;
+    };
+
+    if (! this.props.outcomes.length) {
+      return <AppError>Nenhuma saída encontrada</AppError>;
     }
 
     return (

@@ -16,6 +16,9 @@ export const REQUEST_OUTCOMES = 'REQUEST_OUTCOMES';
 export const RECEIVE_OUTCOMES_SUCCESS = 'RECEIVE_OUTCOMES_SUCCESS';
 export const RECEIVE_OUTCOMES_ERROR = 'RECEIVE_OUTCOMES_ERROR';
 
+export const REQUEST_ALL = 'REQUEST_ALL';
+export const RECEIVE_ALL = 'RECEIVE_ALL';
+
 /*
  * INITIAL DATA
  */
@@ -28,8 +31,7 @@ export function fetchInitialData() {
           const currentMonth = months[0];
 
           dispatch(receiveInitialDataSuccess({ months, currentMonth }));
-          dispatch(fetchIncomes(currentMonth.code));
-          dispatch(fetchOutcomes(currentMonth.code));
+          dispatch(fetchAll(currentMonth.code));
       });
   };
 };
@@ -54,9 +56,8 @@ export function changeMonth(month) {
     dispatch(requestChangeMonth());
 
     if (month) {
-      dispatch(receiveChangeMonthSuccess(month));
-      dispatch(fetchIncomes(month.code));
-      dispatch(fetchOutcomes(month.code));
+        dispatch(receiveChangeMonthSuccess(month))
+        dispatch(fetchAll(month.code))
     } else {
       dispatch(receiveChangeMonthError('Mês inválido'));
     }
@@ -137,4 +138,22 @@ export function receiveOutcomesSuccess(outcomes) {
 
 export function receiveOutcomesError(error) {
   return { type: RECEIVE_OUTCOMES_ERROR, error, };
+};
+
+export function fetchAll(monthCode) {
+  return (dispatch) => {
+    dispatch(requestAll());
+
+    return dispatch(fetchIncomes(monthCode))
+        .then(() => dispatch(fetchOutcomes(monthCode)))
+        .then(() => dispatch(receiveAll()));
+  };
+};
+
+export function requestAll() {
+  return { type: REQUEST_ALL };
+};
+
+export function receiveAll() {
+  return { type: RECEIVE_ALL };
 };

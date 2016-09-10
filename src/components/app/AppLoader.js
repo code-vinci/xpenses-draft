@@ -4,12 +4,12 @@ import color from 'color';
 
 import CircularProgress from 'material-ui/CircularProgress';
 
-import { green100, green600 } from 'material-ui/styles/colors';
+import { grey100, green600 } from 'material-ui/styles/colors';
 
 const styles = {
   base: {
     position: 'absolute',
-    backgroundColor: color(green100).clearer(.2).rgbaString(),
+    backgroundColor: grey100,
     left: 0,
     top: 0,
     right: 0,
@@ -39,7 +39,7 @@ class AppLoader extends Component {
   render() {
     return (
       <div
-        style={[ styles.base, this.props.isLoading && styles.isLoading ]}
+        style={[ styles.base, this.props.isLoading.length && styles.isLoading ]}
         >
         <CircularProgress
           style={styles.loader}

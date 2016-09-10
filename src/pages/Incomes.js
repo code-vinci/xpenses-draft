@@ -8,7 +8,11 @@ import AppTable from '../components/app/AppTable';
 
 class Incomes extends Component {
   render() {
-    if (! this.props.incomes.length && ! this.props.isLoading) {
+    if (this.props.isLoading.length) {
+      return false;
+    };
+
+    if (! this.props.incomes.length) {
       return <span>Nenhuma entrada encontrada</span>;
     }
 

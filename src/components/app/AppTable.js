@@ -5,7 +5,7 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'mate
 class AppTable extends Component {
   render() {
     return (
-      <Table>
+      <Table selectable={false}>
         <TableHeader displaySelectAll={this.props.displaySelect || false} adjustForCheckbox={this.props.displaySelect || false}>
           <TableRow>{this.renderHeaderRows()}</TableRow>
         </TableHeader>
