@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import color from 'color';
 
 import CircularProgress from 'material-ui/CircularProgress';
 
@@ -38,9 +37,7 @@ const styles = {
 class AppLoader extends Component {
   render() {
     return (
-      <div
-        style={[ styles.base, this.props.isLoading.length && styles.isLoading ]}
-        >
+      <div style={[ styles.base, this.props.isLoading.length && styles.isLoading ]}>
         <CircularProgress
           style={styles.loader}
           color={green600}
