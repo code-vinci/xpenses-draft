@@ -36,6 +36,17 @@ class App extends Component {
 
   componentWillMount() {
     this.props.fetchInitialData();
+    this.redirect(this.props.location);
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.redirect(newProps.location);
+  }
+
+  redirect(location) {
+    if (location.pathname === '/') {
+      this.context.router.push('/balance');
+    }
   }
 
   render() {
