@@ -16,6 +16,10 @@ export const REQUEST_OUTCOMES = 'REQUEST_OUTCOMES';
 export const RECEIVE_OUTCOMES_SUCCESS = 'RECEIVE_OUTCOMES_SUCCESS';
 export const RECEIVE_OUTCOMES_ERROR = 'RECEIVE_OUTCOMES_ERROR';
 
+export const REQUEST_BALANCE = 'REQUEST_BALANCE';
+export const RECEIVE_BALANCE_SUCCESS = 'RECEIVE_BALANCE_SUCCESS';
+export const RECEIVE_BALANCE_ERROR = 'RECEIVE_BALANCE_ERROR';
+
 export const REQUEST_ALL = 'REQUEST_ALL';
 export const RECEIVE_ALL = 'RECEIVE_ALL';
 
@@ -144,11 +148,47 @@ export function receiveOutcomesError(error) {
   return { type: RECEIVE_OUTCOMES_ERROR, error, };
 };
 
+/*
+ * OUTCOMES
+ */
+export function fetchBalance(monthCode) {
+  return (dispatch) => {
+    dispatch(requestBalance());
+
+    return API.get(`balance/${monthCode}`)
+      .then(
+        (response) => {
+          dispatch(receiveBalanceSuccess(response));
+        },
+
+        (error) => {
+          dispatch(receiveBalanceError('Nenhum registro encontrado'));
+        },
+      );
+  };
+};
+
+export function requestBalance() {
+  return { type: REQUEST_BALANCE, };
+};
+
+export function receiveBalanceSuccess(balance) {
+  return { type: RECEIVE_BALANCE_SUCCESS, balance, };
+};
+
+export function receiveBalanceError(error) {
+  return { type: RECEIVE_BALANCE_ERROR, error, };
+};
+
+/*
+ * FETCH ALL
+ */
 export function fetchAll(monthCode) {
   return (dispatch) => {
     dispatch(requestAll());
 
-    return dispatch(fetchIncomes(monthCode))
+    return dispatch(fetchBalance(monthCode))
+        .then(() => dispatch(fetchIncomes(monthCode)))
         .then(() => dispatch(fetchOutcomes(monthCode)))
         .then(() => dispatch(receiveAll()));
   };

@@ -6,6 +6,7 @@ const initial = {
   currentMonth: null,
   incomes: [],
   outcomes: [],
+  balance: null,
   error: null,
 };
 
@@ -113,6 +114,34 @@ function app(state = initial, action) {
         error: action.error,
       };
 
+    /*
+     * GET BALANCE
+     */
+    case actions.REQUEST_BALANCE:
+      return {
+        ...state,
+        isLoading: state.isLoading.concat(1),
+      };
+
+    case actions.RECEIVE_BALANCE_SUCCESS:
+      return {
+        ...state,
+        isLoading: state.isLoading.slice(1),
+        balance: action.balance,
+        error: null,
+      };
+
+    case actions.RECEIVE_BALANCE_ERROR:
+      return {
+        ...state,
+        isLoading: state.isLoading.slice(1),
+        balance: null,
+        error: action.error,
+      };
+
+    /*
+     * GET ALL
+     */
     case actions.REQUEST_ALL:
       return {
         ...state,

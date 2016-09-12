@@ -6,7 +6,6 @@ import AppBackground from './components/app/AppBackground';
 import AppHeader from './components/app/AppHeader';
 import AppMenu from './components/app/AppMenu';
 import AppContent from './components/app/AppContent';
-import AppLoader from './components/app/AppLoader';
 
 import { fetchInitialData, changeMonth } from './data/actions';
 
