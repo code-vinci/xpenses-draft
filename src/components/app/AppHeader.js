@@ -4,8 +4,10 @@ import Radium from 'radium';
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
-
+import CircularProgress from 'material-ui/CircularProgress';
 import { green600 } from 'material-ui/styles/colors';
+
+import AppLoader from './AppLoader';
 
 const styles = {
   base: {
@@ -19,6 +21,7 @@ const styles = {
 
   icon: {
     marginTop: 0,
+    position: 'relative',
   },
 
   dropdown: {
@@ -60,28 +63,33 @@ class AppHeader extends Component {
 
   renderDropdownMenu() {
     if (! this.props.currentMonth || ! this.props.months) {
-      return <div></div>;
+      return <CircularProgress
+          color="#fff"
+          size={.5}
+          />
     }
 
     return (
       <DropDownMenu
-        value={this.props.currentMonth.code}
+        value={this.props.currentMonth ? this.props.currentMonth.code : 0}
         style={styles.dropdown}
         labelStyle={styles.dropdownLabel}
         underlineStyle={styles.dropdownUnderline}
         onChange={this.changeMonth}
         >
-        {this.props.months.map((month) => {
-          return (
-            <MenuItem
-              value={month.code}
-              primaryText={month.description}
-              key={month.id}
-              style={styles.dropdownMenu}
-              />
-          );
-        })}
+        {this.props.months.map(this.renderDropdownMenuItem)}
       </DropDownMenu>
+    );
+  }
+
+  renderDropdownMenuItem(month) {
+    return (
+      <MenuItem
+        value={month.code}
+        primaryText={month.description}
+        key={month.id}
+        style={styles.dropdownMenu}
+        />
     );
   }
 
