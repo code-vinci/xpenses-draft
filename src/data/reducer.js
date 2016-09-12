@@ -46,6 +46,7 @@ function app(state = initial, action) {
       return {
         ...state,
         isLoading: state.isLoading.concat(1),
+        currentMonth: null,
       };
 
     case actions.RECEIVE_CHANGE_MONTH_SUCCESS:

@@ -64,7 +64,7 @@ export function changeMonth(monthCode) {
     const month = getState().months.filter((m) => m.code === monthCode)[0];
 
     if (month) {
-      dispatch(receiveChangeMonthSuccess(month))
+      dispatch(receiveChangeMonthSuccess(month));
       dispatch(fetchAll(month.code))
     } else {
       dispatch(receiveChangeMonthError('Mês inválido'));

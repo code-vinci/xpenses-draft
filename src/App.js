@@ -48,7 +48,7 @@ class App extends Component {
     }
 
     if (! this.props.currentMonth && newProps.currentMonth) {
-      this.context.router.push(`/${newProps.currentMonth.code}/balance`);
+      //this.context.router.push(`/${newProps.currentMonth.code}/balance`);
     }
   }
 
@@ -62,6 +62,7 @@ class App extends Component {
             location={this.props.location}
             currentMonth={this.props.currentMonth}
             changeMonth={this.props.changeMonth}
+            isLoading={this.props.isLoading}
             />
           <AppMenu
             router={this.context.router}

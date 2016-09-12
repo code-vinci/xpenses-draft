@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import FlatButton from 'material-ui/FlatButton';
-import { green400, green700 } from 'material-ui/styles/colors';
+import { green400, green600, green700 } from 'material-ui/styles/colors';
 
 const styles = {
   base: {
@@ -20,7 +20,7 @@ const styles = {
   },
 
   current: {
-    backgroundColor: green700,
+    backgroundColor: green600,
     pointerEvents: 'none',
   },
 };
@@ -54,8 +54,8 @@ class AppMenu extends Component {
         label={route.title}
         key={route.title}
         backgroundColor={this.props.current === route.path ? green700 : green400}
-        hoverColor="rgba(255, 255, 255, .2)"
-        rippleColor="rgba(255, 255, 255, .3)"
+        hoverColor={green700}
+        rippleColor={green600}
         onClick={() => this.props.router.push(`/${this.props.month.code}/${route.path}`)}
         />
     );

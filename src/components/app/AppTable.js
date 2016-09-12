@@ -6,6 +6,7 @@ const styles = {
   base: {
     display: 'flex',
     flexDirection: 'column',
+    flex: 1,
   },
   fixed: {
     overflowY: 'overlay',
