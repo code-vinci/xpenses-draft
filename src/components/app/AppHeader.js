@@ -7,8 +7,6 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import CircularProgress from 'material-ui/CircularProgress';
 import { green600 } from 'material-ui/styles/colors';
 
-import AppLoader from './AppLoader';
-
 const styles = {
   base: {
     color: '#fff',

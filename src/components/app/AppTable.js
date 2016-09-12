@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'material-ui/Table';
-import { green900 } from 'material-ui/styles/colors';
 
 const styles = {
   base: {
@@ -16,7 +15,6 @@ const styles = {
     height: 36,
   },
   header: {
-    color: green900,
     height: 36,
     paddingLeft: 20,
     paddingRight: 20,
