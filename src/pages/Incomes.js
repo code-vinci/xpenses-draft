@@ -5,6 +5,7 @@ import { TableRow, TableRowColumn } from 'material-ui/Table';
 import { green50 } from 'material-ui/styles/colors';
 
 import AppTable from '../components/app/AppTable';
+import AppError from '../components/app/AppError';
 
 const styles = {
   base: {
@@ -21,7 +22,7 @@ class Incomes extends Component {
     };
 
     if (! this.props.incomes.length) {
-      return <span>Nenhuma entrada encontrada</span>;
+      return <AppError>Nenhuma entrada encontrada</AppError>;
     }
 
     return (
