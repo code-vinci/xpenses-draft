@@ -41,10 +41,6 @@ const styles = {
 };
 
 class AppHeader extends Component {
-  constructor(props, context) {
-    super(props);
-  }
-
   render() {
     return (
       <div
@@ -90,12 +86,11 @@ class AppHeader extends Component {
   }
 
   changeMonth = (event, key, monthCode) => {
-    this.context.router.push(`/${monthCode}/balance`);
-  }
-};
+    const currentPath = this.props.location.pathname.split('/');
+    const currentLocation = currentPath[currentPath.length - 1];
 
-AppHeader.contextTypes = {
-  router: React.PropTypes.object.isRequired
+    this.props.router.push(`/${monthCode}/${currentLocation}`);
+  }
 };
 
 export default Radium(AppHeader);

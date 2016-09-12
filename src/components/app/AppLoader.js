@@ -9,7 +9,7 @@ import { grey100, green600 } from 'material-ui/styles/colors';
 const styles = {
   base: {
     position: 'absolute',
-    backgroundColor: color(grey100).clearer(.2).rgbaString(),
+    backgroundColor: color(grey100).clearer(0).rgbaString(),
     left: 0,
     top: 0,
     right: 0,

@@ -48,10 +48,7 @@ class App extends Component {
       }
     }
 
-    if (
-      (! this.props.currentMonth && newProps.currentMonth) ||
-      (this.props.currentMonth && newProps.currentMonth && this.props.currentMonth.code !== newProps.currentMonth.code)
-    ) {
+    if (! this.props.currentMonth && newProps.currentMonth) {
       this.context.router.push(`/${newProps.currentMonth.code}/balance`);
     }
   }
@@ -62,6 +59,8 @@ class App extends Component {
         <div style={styles.container}>
           <AppHeader
             months={this.props.months}
+            router={this.context.router}
+            location={this.props.location}
             currentMonth={this.props.currentMonth}
             changeMonth={this.props.changeMonth}
             />
@@ -75,7 +74,6 @@ class App extends Component {
         </div>
 
         <AppBackground />
-        <AppLoader isLoading={this.props.isLoading} />
       </div>
     );
   }
