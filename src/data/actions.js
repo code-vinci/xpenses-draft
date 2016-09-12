@@ -22,13 +22,15 @@ export const RECEIVE_ALL = 'RECEIVE_ALL';
 /*
  * INITIAL DATA
  */
-export function fetchInitialData() {
+export function fetchInitialData(monthCode) {
   return (dispatch) => {
     dispatch(requestInitialData());
 
     return API.get('months')
       .then((months) => {
-          const currentMonth = months[0];
+          const currentMonth = monthCode
+            ? months.filter((month) => month.code === monthCode)[0]
+            : months[0];
 
           dispatch(receiveInitialDataSuccess({ months, currentMonth }));
           dispatch(fetchAll(currentMonth.code));
@@ -51,13 +53,15 @@ export function receiveInitialDataError(error) {
 /*
  * CHANGE MONTH
  */
-export function changeMonth(month) {
+export function changeMonth(monthCode) {
   return (dispatch, getState) => {
     dispatch(requestChangeMonth());
 
+    const month = getState().months.filter((m) => m.code === monthCode)[0];
+
     if (month) {
-        dispatch(receiveChangeMonthSuccess(month))
-        dispatch(fetchAll(month.code))
+      dispatch(receiveChangeMonthSuccess(month))
+      dispatch(fetchAll(month.code))
     } else {
       dispatch(receiveChangeMonthError('Mês inválido'));
     }

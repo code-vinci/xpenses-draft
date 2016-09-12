@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
+import color from 'color';
 
 import CircularProgress from 'material-ui/CircularProgress';
 
@@ -8,7 +9,7 @@ import { grey100, green600 } from 'material-ui/styles/colors';
 const styles = {
   base: {
     position: 'absolute',
-    backgroundColor: grey100,
+    backgroundColor: color(grey100).clearer(.2).rgbaString(),
     left: 0,
     top: 0,
     right: 0,

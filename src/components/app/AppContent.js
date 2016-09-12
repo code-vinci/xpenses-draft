@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 
 import Paper from 'material-ui/Paper';
-import AppLoader from './AppLoader';
 
 const styles = {
   base: {
@@ -18,7 +17,6 @@ class AppContent extends Component {
     return (
       <Paper style={styles.base}>
         {this.props.children}
-        <AppLoader isLoading={this.props.isLoading} />
       </Paper>
     );
   }

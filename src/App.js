@@ -36,30 +36,27 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchInitialData();
+    this.props.fetchInitialData(this.props.params.month);
   }
 
   componentWillReceiveProps(newProps) {
-    const { currentMonth } = this.props;
+    if (this.props.params.month) {
+      if (this.props.params.month !== newProps.params.month) {
+        this.props.changeMonth(newProps.params.month);
 
-    if ((currentMonth && newProps.currentMonth) && currentMonth.code !== newProps.currentMonth.code) {
-      this.redirect(newProps.currentMonth.code);
+        return;
+      }
     }
 
-    if (newProps.location.pathname === '/' && currentMonth) {
-      this.redirect(currentMonth.code);
+    if (
+      (! this.props.currentMonth && newProps.currentMonth) ||
+      (this.props.currentMonth && newProps.currentMonth && this.props.currentMonth.code !== newProps.currentMonth.code)
+    ) {
+      this.context.router.push(`/${newProps.currentMonth.code}/balance`);
     }
-  }
-
-  redirect(monthCode) {
-    this.context.router.push(`/${monthCode}/balance`);
   }
 
   render() {
-    if (this.props.isLoading.length) {
-      return <AppLoader isLoading={this.props.isLoading} />;
-    }
-
     return (
       <div style={styles.base}>
         <div style={styles.container}>
@@ -76,7 +73,9 @@ class App extends Component {
             />
           <AppContent isLoading={this.props.isLoading}>{this.props.children}</AppContent>
         </div>
+
         <AppBackground />
+        <AppLoader isLoading={this.props.isLoading} />
       </div>
     );
   }
@@ -92,7 +91,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchtoProps = (dispatch) => {
   return {
-    fetchInitialData: () => dispatch(fetchInitialData()),
+    fetchInitialData: (month) => dispatch(fetchInitialData(month)),
     changeMonth: (month) => dispatch(changeMonth(month)),
   };
 };
