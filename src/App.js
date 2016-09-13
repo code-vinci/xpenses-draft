@@ -47,8 +47,8 @@ class App extends Component {
       }
     }
 
-    if (! this.props.currentMonth && newProps.currentMonth) {
-      //this.context.router.push(`/${newProps.currentMonth.code}/balance`);
+    if (this.props.location.pathname === '/' && this.props.currentMonth) {
+      this.context.router.push(`/${this.props.currentMonth.code}/balance`);
     }
   }
 
