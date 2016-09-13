@@ -120,10 +120,10 @@ module.exports = {
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
-      {
-        test: /\.json$/,
-        loader: 'json'
-      },
+      //{
+        //test: /\.json$/,
+        //loader: 'json'
+      //},
       // "file" loader makes sure those assets end up in the `build` folder.
       // When you `import` an asset, you get its filename.
       {
@@ -141,6 +141,15 @@ module.exports = {
         loader: 'file',
         query: {
           name: 'favicon.ico?[hash:8]'
+        }
+      },
+      {
+        test: /manifest\.json$/,
+        loader: 'w3c-manifest',
+        query: {
+          name: '[name].[ext]',
+          icon: '[name].[ext]',
+          legacyAppleSupport: true
         }
       },
       // "url" loader works just like "file" loader but it also embeds
@@ -189,6 +198,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
+      favicon: paths.appFavicon,
       minify: {
         removeComments: true,
         collapseWhitespace: true,

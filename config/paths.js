@@ -26,6 +26,7 @@ module.exports = {
   appHtml: resolveApp('index.html'),
   appPackageJson: resolveApp('package.json'),
   appManifestJson: resolveApp('manifest.json'),
+  appFavicon: resolveApp('favicon.ico'),
   appSrc: resolveApp('src'),
   testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
