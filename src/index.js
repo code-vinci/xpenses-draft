@@ -10,6 +10,7 @@ import store from './data/store';
 import Routes from './routes';
 
 import './index.css';
+import './icon.png';
 
 injectTapEventPlugin();
 
