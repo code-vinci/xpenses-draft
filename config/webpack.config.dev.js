@@ -134,6 +134,15 @@ module.exports = {
           name: 'favicon.ico?[hash:8]'
         }
       },
+      // A special case for favicon.ico to place it into build root directory.
+      {
+        test: /\/manifest.json$/,
+        include: [paths.appManifestJson],
+        loader: 'file',
+        query: {
+          name: 'manifest.json'
+        }
+      },
       // "url" loader works just like "file" loader but it also embeds
       // assets smaller than specified size as data URLs to avoid requests.
       {
@@ -194,6 +203,5 @@ module.exports = {
     // See https://github.com/facebookincubator/create-react-app/issues/186
     new WatchMissingNodeModulesPlugin(paths.appNodeModules),
     // Service Worker
-    //new ServiceWorkerWebpackPlugin({ entry: path.join(__dirname, 'src/service-worker.js'), }),
   ]
 };
