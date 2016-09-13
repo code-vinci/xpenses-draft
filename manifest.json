@@ -8,6 +8,6 @@
       "type": "image/png"
     }
   ],
-  "start_url": "./src",
+  "start_url": "/xpenses-draft",
   "display": "standalone"
 }
